@@ -26,6 +26,7 @@ class _HeartbeatScreenState extends State<HeartbeatScreen>
   late Animation<double> _animation;
   int _countdown = 10;
   Timer? _timer;
+  bool _showMessage = false;
 
   @override
   void initState() {
@@ -49,6 +50,9 @@ class _HeartbeatScreenState extends State<HeartbeatScreen>
         });
       } else {
         timer.cancel();
+        setState(() {
+          _showMessage = true;
+        });
       }
     });
   }
@@ -73,10 +77,10 @@ class _HeartbeatScreenState extends State<HeartbeatScreen>
               builder: (context, child) {
                 return Transform.scale(
                   scale: _animation.value,
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                    size: 100,
+                  child: Image.asset(
+                    'assets/images/93Z_Graphic_219_Valentine_25.jpg',
+                    width: 150,
+                    height: 150,
                   ),
                 );
               },
@@ -84,14 +88,21 @@ class _HeartbeatScreenState extends State<HeartbeatScreen>
             SizedBox(height: 20),
             Text(
               "$_countdown",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Valentine'),
             ),
             SizedBox(height: 20),
-            Text(
-              "Happy Valentine's Day!",
-              style: TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
-            )
+            if (_showMessage)
+              Text(
+                "Happy Valentine's Day!",
+                style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                    fontFamily: 'Valentine'),
+              )
           ],
         ),
       ),
